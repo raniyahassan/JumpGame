@@ -14,7 +14,6 @@ class Screen
     public:
         Screen(); 
         RectangleShape square(); 
-        //virtual void Texts() const = 0;
 };
 
 #endif SCREEN

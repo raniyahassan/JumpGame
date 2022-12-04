@@ -10,9 +10,13 @@ using namespace sf;
 class Guy 
 {
     private:
-        int x;
+        float positionX;
+        float positionY; 
     public:
         Guy(); 
+        Sprite createGuy(); 
+        Vector2f getPosition();
+        void setPosition(Vector2f newPosition);
 };
 
 #endif GUY
