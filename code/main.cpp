@@ -1,14 +1,15 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Screen.h"
+#include "Guy.h"
 
 using namespace std;
 using namespace sf;
 
 int main()
 {
-    // double width = VideoMode::getDesktopMode().width;
-    // double height = VideoMode::getDesktopMode().height; 
+    //double width = VideoMode::getDesktopMode().width;
+    //double height = VideoMode::getDesktopMode().height; 
 
     Texture background; 
     background.loadFromFile("images/background.png"); 
@@ -17,12 +18,16 @@ int main()
     Texture playerTexture;
     playerTexture.loadFromFile("images/tempGuy.png");
     Sprite player(playerTexture); 
-    player.setPosition(Vector2f{172 , 500}); 
+    player.setPosition(172, 650); 
+    player.setScale(0.1,0.1); 
+
+    Guy Steve(player); 
 
     Screen s; 
     RectangleShape backs = s.square(); 
 
     Event event;
+    //VideoMode VideoWindow(width, height); 
     VideoMode VideoWindow(686, 966);
     RenderWindow window(VideoWindow, "JumpGame" ); 
 
@@ -33,8 +38,12 @@ int main()
     {
         while (window.pollEvent(event))
         {
-
-            window.draw(back); 
+            window.clear(); 
+            Vector2f posi = Steve.getPosition(); 
+            posi.y += 8;
+            Steve.setPosition(posi);
+            player.setPosition(posi);
+            window.draw(player); 
 
             if (Keyboard::isKeyPressed(Keyboard::Escape)) {window.close();}
 
@@ -42,17 +51,30 @@ int main()
 
             if (current == START)
             {
-                window.clear();
-                window.draw(backs);
-
-                // window.draw(text); 
-                // if (start button pressed) {current == PLAYING}
+                if (Keyboard::isKeyPressed(Keyboard::Space)) //actually if, char interacts with platform
+                {
+                    int jumpHeight = 50; 
+                    int i = 0; 
+                    while (i < jumpHeight)
+                    {
+                        window.clear();
+                        Vector2f pos = Steve.getPosition(); 
+                        pos.y -=1; 
+                        Steve.setPosition(pos); 
+                        player.setPosition(pos); 
+                        window.draw(player); 
+                        i++; 
+                    }
+                }    
+                
                 
             }
-
+             
         }
 
         window.clear();
+        window.draw(back);
+        window.draw(backs); 
         window.draw(player); 
         window.display(); 
     }

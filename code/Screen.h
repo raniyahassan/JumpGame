@@ -16,4 +16,4 @@ class Screen
         RectangleShape square(); 
 };
 
-#endif SCREEN
+#endif 

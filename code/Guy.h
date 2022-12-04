@@ -13,10 +13,10 @@ class Guy
         float positionX;
         float positionY; 
     public:
-        Guy(); 
-        Sprite createGuy(); 
+        Guy(Sprite x); 
         Vector2f getPosition();
         void setPosition(Vector2f newPosition);
+        Sprite y; 
 };
 
-#endif GUY
+#endif 

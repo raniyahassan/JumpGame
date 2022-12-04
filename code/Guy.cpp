@@ -5,20 +5,12 @@
 using namespace std;
 using namespace sf; 
 
-Guy::Guy()
+Guy::Guy(Sprite x)
 {
+    Sprite y = x; 
     positionX = 172;
-    positionY = 500; 
+    positionY = 650; 
 }; 
-
-Sprite Guy::createGuy()
-{
-    Texture playerTexture;
-    playerTexture.loadFromFile("images/tempGuy.png");
-    Sprite player(playerTexture); 
-
-    return player; 
-}
 
 Vector2f Guy::getPosition()
 {
