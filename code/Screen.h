@@ -13,7 +13,7 @@ class Screen
         int x;
     public:
         Screen(); 
-        RectangleShape square(double width, double height); 
+        RectangleShape square(); 
         //virtual void Texts() const = 0;
 };
 

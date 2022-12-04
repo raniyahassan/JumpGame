@@ -10,10 +10,9 @@ Screen::Screen()
     int x; 
 }
 
-RectangleShape Screen::square(double width, double height)
-{
-    RectangleShape blk(Vector2f{width , height}); 
+RectangleShape Screen::square()
+{ 
+    RectangleShape blk(Vector2f{686 , 966}); 
     blk.setFillColor(Color(0,0,0,100)); 
-
     return blk; 
 }

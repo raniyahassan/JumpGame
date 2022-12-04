@@ -13,8 +13,8 @@ int main()
     Texture background; 
     background.loadFromFile("images/background.png"); 
     Sprite back(background); 
-    Screen s(); 
-    RectangleShape backs = s.rect(686, 966); 
+    Screen s; 
+    RectangleShape backs = s.square(); 
 
     Event event;
     VideoMode VideoWindow(686, 966);
