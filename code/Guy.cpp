@@ -8,7 +8,7 @@ using namespace sf;
 Guy::Guy(Sprite x)
 {
     Sprite y = x; 
-    positionX = 172;
+    positionX = 270;
     positionY = 650; 
 }; 
 
