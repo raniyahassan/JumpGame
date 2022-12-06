@@ -6,6 +6,7 @@
 
 using namespace std;
 using namespace sf;
+Texture* texture; 
 
 class Platform
 {

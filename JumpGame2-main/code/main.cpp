@@ -44,11 +44,7 @@ int main()
             if (Keyboard::isKeyPressed(Keyboard::Escape)) {window.close();}
             if (event.type == Event::Closed) {window.close();}
             if (current == START)
-            { 
-                if ((barPos.y == (guyPos.y + 132)) && (barPos.x <= (guyPos.x + 55)) && (barPos.x >= (guyPos.x - 15)))
-                {
-                    jump(window, player, player.getPlayer()); 
-                }                  
+            {                  
    
                 /*window.clear(); 
                 Vector2f posi = Steve.getPosition(); 
