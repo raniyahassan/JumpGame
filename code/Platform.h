@@ -9,7 +9,15 @@ using namespace sf;
 
 class Platform
 {
-    
+    private:
+        Vector2f m_position;
+        Sprite platform;
+    public:
+        Platform();
+        Sprite returnPlat();
+        FloatRect getBounds(); 
+        Vector2f getPosition();
+        vector<Sprite> generator(); 
 };
 
 #endif
