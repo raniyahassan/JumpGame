@@ -11,13 +11,14 @@ using namespace sf;
 void generator(vector<Sprite>&, Texture&); 
 void position(vector<Sprite>&);
 void random(Sprite&); 
-int positionCheck(Sprite&, vector<Vector2f>&); 
 void jump(RenderWindow& win, Guy& x, Sprite& p); 
+void checkVector(vector<Sprite>); 
+Sprite checkCollision(Sprite, Sprite);
 
 int main()
 {
-    double width = 686; //VideoMode::getDesktopMode().width;
-    double height = 966; //VideoMode::getDesktopMode().height; 
+    double width = 686; // VideoMode::getDesktopMode().width;
+    double height = 966; // VideoMode::getDesktopMode().height; 
 
     Texture backgroundTexture; 
     backgroundTexture.loadFromFile("images/background.png"); 
@@ -31,6 +32,7 @@ int main()
     vector<Sprite> platforms(20); 
     generator(platforms, barTexture); 
     position(platforms); 
+
 
     Texture playerTexture;
     playerTexture.loadFromFile("images/tempGuy.png");
@@ -83,7 +85,7 @@ int main()
                 {
                     window.clear();
                     Vector2f pos = Steve.getPosition(); 
-                    pos.x -=2; 
+                    pos.x -= 2; 
                     Steve.setPosition(pos); 
                     player.setPosition(pos); 
                     window.draw(player); 
@@ -93,7 +95,7 @@ int main()
                 {
                     window.clear();
                     Vector2f pos = Steve.getPosition(); 
-                    pos.x +=2; 
+                    pos.x += 2; 
                     Steve.setPosition(pos); 
                     player.setPosition(pos); 
                     window.draw(player); 
@@ -107,29 +109,23 @@ int main()
                 window.draw(player);  
                 
             }
-             
         }
 
         window.clear();
-        
         window.draw(background);
         window.draw(backs); 
         window.draw(barOne); 
-
-        for (int i = 0; i < platforms.size(); i++) {window.draw(platforms[i]);}
+        for (int i = 0; i < platforms.size(); i++) { window.draw(platforms[i]); } 
         window.draw(player); 
-        window.display(); 
+        window.display();  
     }
-
+    
     return 0;
 }
 
 void generator(vector<Sprite>& x, Texture& texture)
 {
-    for (int i = 0; i < x.size(); i++)
-    {
-        x[i].setTexture(texture); 
-    }
+    for (int i = 0; i < x.size(); i++) { x[i].setTexture(texture); } 
 }
 
 void position(vector<Sprite>& x)
@@ -139,7 +135,11 @@ void position(vector<Sprite>& x)
     {
         random(x[i]); 
         cout << "Bar's position is (" << x[i].getPosition().x << ", " << x[i].getPosition().y << ")." << endl; 
+        
     }
+
+    checkVector(x); 
+
 }
 
 void random(Sprite& x)
@@ -147,14 +147,38 @@ void random(Sprite& x)
     x.setPosition(70 + (rand() % 510), 70 + (rand() % 590));
 }
 
-void jump(RenderWindow& win, Guy& x, Sprite& p)
+void checkVector(vector<Sprite> x)
+{
+    int size = x.size(); 
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = size; j > 0; j--)
+        {
+            x[i] = checkCollision(x[i], x[j]); 
+        }
+    }
+
+}
+
+Sprite checkCollision(Sprite x, Sprite y)
+{
+    if ((x.getPosition().x <= (y.getPosition().x + 35)) || (x.getPosition().x >= (y.getPosition().x - 35)))
+    {
+        random(x); 
+        checkCollision(x, y); 
+    }
+
+    return x;
+    
+}
+void jump(RenderWindow& win, Guy& x, Sprite& p) 
 {
     int JumpHeight = 55;
-    for (int i = 0; i < JumpHeight; i++)
+    for (int i = 0; i < JumpHeight; i++) 
     {
         win.clear();
         Vector2f pos = x.getPosition(); 
-        pos.y -=2; 
+        pos.y -= 2; 
         x.setPosition(pos); 
         p.setPosition(pos); 
         win.draw(p); 
