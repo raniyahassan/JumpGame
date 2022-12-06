@@ -10,6 +10,8 @@ Player::Player()
     Texture texture;
     texture.loadFromFile("images/tempGuy.png");
     Sprite p(texture); 
+    p.setScale(0.1, 0.1); 
+    p.setPosition(270, 650); 
     player = p; 
 }; 
 

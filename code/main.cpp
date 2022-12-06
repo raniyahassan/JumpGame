@@ -31,13 +31,7 @@ int main()
     generator(platforms, barTexture); 
     position(platforms); 
 
-
-    Player player1; 
-    player1.setPosition(270, 650); 
-    player1.setScale(0.1,0.1); 
-
-    Player Steve(player); 
-
+    Player player;     
     Event event;
     VideoMode VideoWindow(width, height); 
     RenderWindow window(VideoWindow, "JumpGame" ); 
@@ -64,7 +58,7 @@ int main()
                     cout << "clicked: (" << clickedX << ", " << clickedY << ")\n"; 
             }
 
-            Vector2f guyPos = Steve.getPosition(); 
+            Vector2f guyPos = player.getPlayer().getPosition(); 
             Vector2f barPos = barOne.getPosition(); 
 
             if (current == START)
@@ -72,7 +66,7 @@ int main()
                 
                 if ((barPos.y == (guyPos.y + 132)) && (barPos.x <= (guyPos.x + 55)) && (barPos.x >= (guyPos.x - 15)))
                 {
-                    jump(window, Steve, player); 
+                    jump(window, player, player.getPlayer()); 
                 }                  
 
                 if (Keyboard::isKeyPressed(Keyboard::Left))
@@ -82,7 +76,7 @@ int main()
                     pos.x -= 2; 
                     Steve.setPosition(pos); 
                     player.setPosition(pos); 
-                    window.draw(player); 
+                    window.draw(Steve); 
                 }
 
                 if (Keyboard::isKeyPressed(Keyboard::Right))
@@ -92,7 +86,7 @@ int main()
                     pos.x += 2; 
                     Steve.setPosition(pos); 
                     player.setPosition(pos); 
-                    window.draw(player); 
+                    window.draw(Steve); 
                 } 
 
                 window.clear(); 
@@ -100,7 +94,7 @@ int main()
                 posi.y += 2;
                 Steve.setPosition(posi);
                 player.setPosition(posi);
-                window.draw(player);  
+                window.draw(Steve);  
                 
             }
         }
@@ -109,7 +103,7 @@ int main()
         window.draw(background);
         window.draw(barOne); 
         for (int i = 0; i < platforms.size(); i++) { window.draw(platforms[i]); } 
-        window.draw(player); 
+        window.draw(Steve); 
         window.display();  
     }
     
