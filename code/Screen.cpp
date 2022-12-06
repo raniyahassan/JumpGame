@@ -5,12 +5,9 @@
 using namespace std;
 using namespace sf;
 
-Screen::Screen(float winWidth, float winHeight)
+Screen::Screen(RenderWindow& win)
 {
-    width = winWidth;
-    height = winHeight; 
-    m_view.setSize(winWidth, winHeight);
-    m_view.setCenter(0.0, 0.0);
+    m_view = win.getDefaultView();  
 }
 
 RectangleShape Screen::square()
@@ -25,11 +22,11 @@ View Screen::getView()
     return m_view; 
 }
 
-void Screen::moveViewup()
+void Screen::moveViewUp()
 {
-    double x = width; 
-    double y = height + 300;
-    m_view.setSize(x, y); 
+    Vector2f curr = m_view.getCenter(); 
+    curr.y +=200; 
+    m_view.setCenter(curr);
 }
 
 /*void Screen::startView()

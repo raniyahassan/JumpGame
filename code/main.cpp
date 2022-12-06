@@ -3,7 +3,7 @@
 #include <time.h>
 #include <vector> 
 #include "Screen.h"
-#include "Guy.h"
+#include "Player.h"
 
 using namespace std;
 using namespace sf;
@@ -11,9 +11,7 @@ using namespace sf;
 void generator(vector<Sprite>&, Texture&); 
 void position(vector<Sprite>&);
 void random(Sprite&); 
-void jump(RenderWindow& win, Guy& x, Sprite& p); 
-void checkVector(vector<Sprite>); 
-Sprite checkCollision(Sprite, Sprite);
+void jump(RenderWindow& win, Player& x, Sprite& p); 
 
 int main()
 {
@@ -40,14 +38,12 @@ int main()
     player.setPosition(270, 650); 
     player.setScale(0.1,0.1); 
 
-    Guy Steve(player); 
+    Player Steve(player); 
 
     Event event;
     VideoMode VideoWindow(width, height); 
     RenderWindow window(VideoWindow, "JumpGame" ); 
-    sf::View view(sf::FloatRect(200.f, 200.f, 300.f, 200.f));
-    window.setView(view);
-    view.setCenter(200.f, 200.f);
+    Screen screen(window); 
 
     enum State {START, PLAYING, END}; 
     State current = START; 
@@ -163,7 +159,7 @@ void random(Sprite& x)
 
 
 
-void jump(RenderWindow& win, Guy& x, Sprite& p) 
+void jump(RenderWindow& win, Player& x, Sprite& p) 
 {
     int JumpHeight = 55;
     for (int i = 0; i < JumpHeight; i++) 

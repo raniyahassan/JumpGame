@@ -10,10 +10,14 @@ using namespace sf;
 class Screen 
 {
     private:
-        int x;
+        View m_view;
+        float width, height; 
     public:
-        Screen(); 
+        Screen(float, float); 
         RectangleShape square(); 
+        View getView(); 
+        void moveViewUp(); 
+
 };
 
 #endif 
