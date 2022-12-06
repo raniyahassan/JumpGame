@@ -3,6 +3,7 @@
 #include <vector> 
 #include "Screen.h"
 #include "Guy.h"
+#include "Platform.h"
 
 using namespace std;
 using namespace sf;
@@ -16,30 +17,19 @@ int main()
     backgroundTexture.loadFromFile("images/background.png"); 
     Sprite background(backgroundTexture); 
 
-    Texture barTexture;
-    barTexture.loadFromFile("images/bar.png");
-    Sprite barOne(barTexture); 
+    Texture *barTexture;
+    barTexture->loadFromFile("images/bar.png");
+    Sprite barOne(*barTexture); 
     barOne.setPosition(300, 800); 
 
-    vector<Sprite> platforms;
-    for (int i = 0; i < 10; i++)
-    {
-        Sprite bar(barTexture); 
-        platforms.push_back(bar); 
-    }
+    Platform p; 
+    vector<Sprite>* never = p.NormalPlatforms(); 
 
     Texture playerTexture;
     playerTexture.loadFromFile("images/tempGuy.png");
     Sprite player(playerTexture); 
     player.setPosition(270, 650); 
     player.setScale(0.1,0.1); 
-
-    for (int i=0;i<10;i++)
-    {
-        Vector2f positionz = platforms[i].getPosition(); 
-        positionz.x= 270 + (i*6); //rand()%600;
-        positionz.y= 200 + (i*6); //rand()%600;
-    }
 
     Guy Steve(player); 
 
@@ -119,12 +109,12 @@ int main()
 
         window.clear();
 
-        for (int i=0; i<10; i++)
-        {
-            Sprite bar = platforms[i]; 
-            window.draw(bar);   
-        }
 
+        for (int i = 0; i < never->size(); i++) 
+        {
+            Sprite s = 
+            window.draw(s); 
+        }
         window.draw(background);
         window.draw(backs); 
         window.draw(barOne); 
