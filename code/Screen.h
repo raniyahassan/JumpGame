@@ -13,7 +13,7 @@ class Screen
         View m_view;
         float width, height; 
     public:
-        Screen(float, float); 
+        Screen(RenderWindow&); 
         RectangleShape square(); 
         View getView(); 
         void moveViewUp(); 

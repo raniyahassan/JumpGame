@@ -12,11 +12,13 @@ class Player
     private:
         float positionX;
         float positionY; 
+        Sprite player; 
     public:
-        Player(Sprite x); 
+        Player(); 
+        Sprite getPlayer(); 
+        FloatRect getBounds(); 
         Vector2f getPosition();
         void setPosition(Vector2f newPosition);
-        Sprite y; 
 };
 
 #endif 

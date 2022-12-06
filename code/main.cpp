@@ -32,11 +32,9 @@ int main()
     position(platforms); 
 
 
-    Texture playerTexture;
-    playerTexture.loadFromFile("images/tempGuy.png");
-    Sprite player(playerTexture); 
-    player.setPosition(270, 650); 
-    player.setScale(0.1,0.1); 
+    Player player1; 
+    player1.setPosition(270, 650); 
+    player1.setScale(0.1,0.1); 
 
     Player Steve(player); 
 
