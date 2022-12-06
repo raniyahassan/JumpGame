@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <vector> 
 #include "Screen.h"
 #include "Guy.h"
 
@@ -20,11 +21,25 @@ int main()
     Sprite barOne(barTexture); 
     barOne.setPosition(300, 800); 
 
+    vector<Sprite> platforms;
+    for (int i = 0; i < 10; i++)
+    {
+        Sprite bar(barTexture); 
+        platforms.push_back(bar); 
+    }
+
     Texture playerTexture;
     playerTexture.loadFromFile("images/tempGuy.png");
     Sprite player(playerTexture); 
     player.setPosition(270, 650); 
     player.setScale(0.1,0.1); 
+
+    for (int i=0;i<10;i++)
+    {
+        Vector2f positionz = platforms[i].getPosition(); 
+        positionz.x= 270 + (i*6); //rand()%600;
+        positionz.y= 200 + (i*6); //rand()%600;
+    }
 
     Guy Steve(player); 
 
@@ -54,7 +69,7 @@ int main()
 
             if (current == START)
             {
-                if ((barPos.y == (guyPos.y + 132)) && (barPos.x <= (guyPos.x + 35)) && (barPos.x >= (guyPos.x - 35)))
+                if ((barPos.y == (guyPos.y + 132)) && (barPos.x <= (guyPos.x + 75)) && (barPos.x >= (guyPos.x - 75)))
                 {
                     int jumpHeight = 50; 
                     int i = 0; 
@@ -70,6 +85,26 @@ int main()
                     }
                 }  
 
+                if (Keyboard::isKeyPressed(Keyboard::Left))
+                {
+                    window.clear();
+                    Vector2f pos = Steve.getPosition(); 
+                    pos.x -=2; 
+                    Steve.setPosition(pos); 
+                    player.setPosition(pos); 
+                    window.draw(player); 
+                }
+
+                if (Keyboard::isKeyPressed(Keyboard::Right))
+                {
+                    window.clear();
+                    Vector2f pos = Steve.getPosition(); 
+                    pos.x +=2; 
+                    Steve.setPosition(pos); 
+                    player.setPosition(pos); 
+                    window.draw(player); 
+                }
+
                 window.clear(); 
                 Vector2f posi = Steve.getPosition(); 
                 posi.y += 2;
@@ -83,6 +118,13 @@ int main()
         }
 
         window.clear();
+
+        for (int i=0; i<10; i++)
+        {
+            Sprite bar = platforms[i]; 
+            window.draw(bar);   
+        }
+
         window.draw(background);
         window.draw(backs); 
         window.draw(barOne); 
