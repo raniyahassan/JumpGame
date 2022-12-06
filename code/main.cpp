@@ -3,10 +3,14 @@
 #include <vector> 
 #include "Screen.h"
 #include "Guy.h"
-#include "Platform.h"
 
 using namespace std;
 using namespace sf;
+
+void generator(vector<Sprite>&, Texture&); 
+void position(vector<Sprite>&);
+
+
 
 int main()
 {
@@ -17,13 +21,14 @@ int main()
     backgroundTexture.loadFromFile("images/background.png"); 
     Sprite background(backgroundTexture); 
 
-    Texture *barTexture;
-    barTexture->loadFromFile("images/bar.png");
-    Sprite barOne(*barTexture); 
+    Texture barTexture;
+    barTexture.loadFromFile("images/bar.png");
+    Sprite barOne(barTexture); 
     barOne.setPosition(300, 800); 
 
-    Platform p; 
-    vector<Sprite>* never = p.NormalPlatforms(); 
+    vector<Sprite> platforms(5); 
+    generator(platforms, barTexture); 
+    position(platforms); 
 
     Texture playerTexture;
     playerTexture.loadFromFile("images/tempGuy.png");
@@ -61,7 +66,7 @@ int main()
             {
                 if ((barPos.y == (guyPos.y + 132)) && (barPos.x <= (guyPos.x + 75)) && (barPos.x >= (guyPos.x - 75)))
                 {
-                    int jumpHeight = 50; 
+                    int jumpHeight = 55; 
                     int i = 0; 
                     while (i < jumpHeight)
                     {
@@ -102,26 +107,40 @@ int main()
                 player.setPosition(posi);
                 window.draw(player);   
                 
-                
             }
              
         }
 
         window.clear();
-
-
-        for (int i = 0; i < never->size(); i++) 
-        {
-            Sprite s = 
-            window.draw(s); 
-        }
+        
         window.draw(background);
         window.draw(backs); 
         window.draw(barOne); 
+        window.draw(platforms[0]);
+        window.draw(platforms[1]);
+        window.draw(platforms[2]);
+        window.draw(platforms[3]);
         window.draw(player); 
         window.display(); 
     }
 
 
     return 0;
+}
+
+void generator(vector<Sprite>& x, Texture& texture)
+{
+    for (int i = 0; i < x.size(); i++)
+    {
+        x[i].setTexture(texture); 
+    }
+}
+
+void position(vector<Sprite>& x)
+{
+    for (int i = 0; i < x.size(); i++)
+    {
+        x[i].setPosition((60*i+4),70+(i*3)); 
+        cout << "Bar's position is (" << x[i].getPosition().x << ", " << x[i].getPosition().y << ")." << endl; 
+    }
 }
