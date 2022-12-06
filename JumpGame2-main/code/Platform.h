@@ -12,8 +12,6 @@ class Platform
     private:
         Vector2f m_position;
         Sprite platform;
-        Texture texture;
-        
     public:
         Platform();
         Sprite returnPlat();

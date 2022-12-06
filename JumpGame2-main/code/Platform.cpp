@@ -29,16 +29,14 @@ Vector2f Platform::getPosition()
 vector<Sprite> Platform::generator()
 {
     srand(time(0));
-    
+    Texture texture;
+    texture.loadFromFile("images/bar.png");
     vector<Sprite> x(20); 
     for (int i = 0; i < x.size(); i++)
     {
-        Texture texture;
-        texture.loadFromFile("images/bar.png");
         x[i].setTexture(texture);
         x[i].setPosition(70 + (rand() % 510), 70 + (rand() % 650));
     }
 
     return x; 
 }
-
