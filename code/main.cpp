@@ -147,20 +147,26 @@ void position(vector<Sprite>& x)
     for (int i = 0; i < x.size(); i++)
     {
         random(x[i]); 
+        for (int j = 0; j < i; j++)
+        {
+            positionCheck(x[i], x[j]); // i is whats being compared to j 
+        }
         cout << "Bar's position is (" << x[i].getPosition().x << ", " << x[i].getPosition().y << ")." << endl; 
     }
 }
 
 void random(Sprite& x)
 {
-    
     x.setPosition(70 + (rand() % 510), 70 + (rand() % 590));
 }
 
-void positionCheck(Sprite& x, Sprite& y)
+void positionCheck(Sprite& x, Sprite& y) // x is being compared to y 
 {
     Vector2f pos = x.getPosition();
     Vector2f pos2 = y.getPosition(); 
 
+    float xX = pos.x; 
+    float yX = pos2.x;
 
+    if ((xX ))
 }
