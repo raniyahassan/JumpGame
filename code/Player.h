@@ -1,48 +1,26 @@
-#ifndef PLAYER
-#define PLAYER
-
-#include <iostream>
+#pragma once
 #include <SFML/Graphics.hpp>
-
-using namespace std;
 using namespace sf;
-
-class Player 
+class Player
 {
-    private:
-        Vector2f m_Position; 
-        Sprite player; 
-        bool m_LeftPressed;
-        bool m_RightPressed;
-        float m_Speed;
-    public:
-        Player(); 
-        Sprite getPlayer(); 
-        FloatRect getBounds(); 
-        Vector2f getPosition();
-        void setPosition(Vector2f newPosition);
-        void moveLeft();
-        void moveRight();
-        void stopLeft();
-        void stopRight();
-        void getVelocity();
-        void bouncePlat();
-        void update(Time dt);
-        
-};
-
-#endif
-/*
 private:
-    Texture m_Texture;
-    
-
+   Vector2f m_Position;
+   Sprite player;    
+   float m_Speed;
+   int m_Height;
+ 
 public:
-    Player(float startX, float startY);
-    FloatRect getPosition();
-    Vector2f getCenter();
-    Sprite getSprite();
-    
-
-
-};*/
+   Player();
+   Sprite getPlayer();
+   FloatRect getBounds();
+   Vector2f getPosition();
+   void setPosition(Vector2f newPosition);
+   void moveLeft();
+   void moveRight();
+   void stopLeft();
+   void stopRight();
+   float getVelocity();
+ 
+   void update(Time dt);
+   void setPosition(float X, float Y);
+};

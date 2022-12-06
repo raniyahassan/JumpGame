@@ -33,7 +33,7 @@ int main()
     Event event;
     VideoMode VideoWindow(width, height); 
     RenderWindow window(VideoWindow, "JumpGame" ); 
-    //Screen screen(window); 
+    Screen screen(window); 
 
     enum State {START, PLAYING, END}; 
     State current = START; 
