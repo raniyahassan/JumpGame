@@ -4,13 +4,11 @@
 #include <vector> 
 #include "Screen.h"
 #include "Player.h"
+#include "Platform.h"
 
 using namespace std;
 using namespace sf;
 
-void generator(vector<Sprite>&, Texture&); 
-void position(vector<Sprite>&);
-void random(Sprite&); 
 void jump(RenderWindow& win, Player& x, Sprite& p); 
 
 int main()
@@ -27,15 +25,15 @@ int main()
     Sprite barOne(barTexture); 
     barOne.setPosition(300, 800); 
 
-    vector<Sprite> platforms(20); 
-    generator(platforms, barTexture); 
-    position(platforms); 
+    Platform p;
+    vector<Sprite> platforms = p.generator(); 
+
 
     Player player;     
     Event event;
     VideoMode VideoWindow(width, height); 
     RenderWindow window(VideoWindow, "JumpGame" ); 
-    Screen screen(window); 
+    //Screen screen(window); 
 
     enum State {START, PLAYING, END}; 
     State current = START; 
@@ -43,7 +41,7 @@ int main()
     while (window.isOpen())
     {
         
-        while (window.pollEvent(event))
+        /*while (window.pollEvent(event))
         {
 
             if (Keyboard::isKeyPressed(Keyboard::Escape)) {window.close();}
@@ -82,7 +80,7 @@ int main()
                 if (Keyboard::isKeyPressed(Keyboard::Right))
                 {
                     window.clear();
-                    Vector2f pos = Steve.getPosition(); 
+                    Vector2f pos = player.getPlayer().getPosition(); 
                     pos.x += 2; 
                     Steve.setPosition(pos); 
                     player.setPosition(pos); 
@@ -96,14 +94,13 @@ int main()
                 player.setPosition(posi);
                 window.draw(Steve);  
                 
-            }
-        }
+            }*/
 
         window.clear();
         window.draw(background);
         window.draw(barOne); 
         for (int i = 0; i < platforms.size(); i++) { window.draw(platforms[i]); } 
-        window.draw(Steve); 
+        //window.draw(Steve); 
         window.display();  
     }
     
@@ -112,22 +109,22 @@ int main()
 
 
 
+void jump(RenderWindow& win, Player& x, Sprite& p) 
+{
+    int JumpHeight = 55;
+    for (int i = 0; i < JumpHeight; i++) 
+    {
+        win.clear();
+        Vector2f pos = x.getPosition(); 
+        pos.y -= 2; 
+        x.setPosition(pos); 
+        p.setPosition(pos); 
+        win.draw(p); 
+    }
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*
 void generator(vector<Sprite>& x, Texture& texture)
 {
     for (int i = 0; i < x.size(); i++) { x[i].setTexture(texture); } 
@@ -151,19 +148,7 @@ void random(Sprite& x)
 
 
 
-void jump(RenderWindow& win, Player& x, Sprite& p) 
-{
-    int JumpHeight = 55;
-    for (int i = 0; i < JumpHeight; i++) 
-    {
-        win.clear();
-        Vector2f pos = x.getPosition(); 
-        pos.y -= 2; 
-        x.setPosition(pos); 
-        p.setPosition(pos); 
-        win.draw(p); 
-    }
-}
+
 /*void checkVector(vector<Sprite> x)
 {
     int size = x.size(); 
@@ -188,7 +173,7 @@ Sprite checkCollision(Sprite x, Sprite y)
     return x;
     
 }
-*/
+
 /*void checkCollision(vector<Sprite> x)
 {
     srand(time(0));

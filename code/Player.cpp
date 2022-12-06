@@ -22,8 +22,7 @@ Sprite Player::getPlayer()
 
 Vector2f Player::getPosition()
 {
-    Vector2f currPosition = {positionX , positionY};
-    return currPosition;
+    return m_Position;
 }
 
 FloatRect Player::getBounds()
@@ -33,6 +32,5 @@ FloatRect Player::getBounds()
 
 void Player::setPosition(Vector2f newPosition)
 {
-    positionX = newPosition.x;
-    positionY = newPosition.y;
+    m_Position = newPosition;
 }
