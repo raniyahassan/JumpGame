@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <time.h>
 #include <vector> 
 #include "Screen.h"
 #include "Guy.h"
@@ -9,13 +10,14 @@ using namespace sf;
 
 void generator(vector<Sprite>&, Texture&); 
 void position(vector<Sprite>&);
-
+void random(Sprite&); 
+void positionCheck(Sprite&, Sprite&); 
 
 
 int main()
 {
-    //double width = VideoMode::getDesktopMode().width;
-    //double height = VideoMode::getDesktopMode().height; 
+    double width = 686; //VideoMode::getDesktopMode().width;
+    double height = 966; //VideoMode::getDesktopMode().height; 
 
     Texture backgroundTexture; 
     backgroundTexture.loadFromFile("images/background.png"); 
@@ -26,7 +28,7 @@ int main()
     Sprite barOne(barTexture); 
     barOne.setPosition(300, 800); 
 
-    vector<Sprite> platforms(5); 
+    vector<Sprite> platforms(20); 
     generator(platforms, barTexture); 
     position(platforms); 
 
@@ -42,8 +44,7 @@ int main()
     RectangleShape backs = s.square(); 
 
     Event event;
-    //VideoMode VideoWindow(width, height); 
-    VideoMode VideoWindow(686, 966);
+    VideoMode VideoWindow(width, height); 
     RenderWindow window(VideoWindow, "JumpGame" ); 
 
     enum State {START, PLAYING, END}; 
@@ -57,14 +58,21 @@ int main()
 
             if (event.type == Event::Closed) {window.close();}
 
+            if (event.type == Event::MouseButtonPressed )
+			{
+					int clickedX = event.mouseButton.x;
+					int clickedY = event.mouseButton.y;
+
+                    cout << "clicked: (" << clickedX << ", " << clickedY << ")\n"; 
+            }
+
             Vector2f guyPos = Steve.getPosition(); 
             Vector2f barPos = barOne.getPosition(); 
-            cout << "guy: (" << guyPos.x << ", " << guyPos.y << ")\n"; 
-            cout << "bar: (" << barPos.x << ", " << barPos.y << ")\n"; 
+
 
             if (current == START)
             {
-                if ((barPos.y == (guyPos.y + 132)) && (barPos.x <= (guyPos.x + 75)) && (barPos.x >= (guyPos.x - 75)))
+                if ((barPos.y == (guyPos.y + 132)) && (barPos.x <= (guyPos.x + 55)) && (barPos.x >= (guyPos.x - 15)))
                 {
                     int jumpHeight = 55; 
                     int i = 0; 
@@ -116,14 +124,11 @@ int main()
         window.draw(background);
         window.draw(backs); 
         window.draw(barOne); 
-        window.draw(platforms[0]);
-        window.draw(platforms[1]);
-        window.draw(platforms[2]);
-        window.draw(platforms[3]);
+
+        for (int i = 0; i < platforms.size(); i++) {window.draw(platforms[i]);}
         window.draw(player); 
         window.display(); 
     }
-
 
     return 0;
 }
@@ -138,9 +143,24 @@ void generator(vector<Sprite>& x, Texture& texture)
 
 void position(vector<Sprite>& x)
 {
+    srand(time(0)); 
     for (int i = 0; i < x.size(); i++)
     {
-        x[i].setPosition((60*i+4),70+(i*3)); 
+        random(x[i]); 
         cout << "Bar's position is (" << x[i].getPosition().x << ", " << x[i].getPosition().y << ")." << endl; 
     }
+}
+
+void random(Sprite& x)
+{
+    
+    x.setPosition(70 + (rand() % 510), 70 + (rand() % 590));
+}
+
+void positionCheck(Sprite& x, Sprite& y)
+{
+    Vector2f pos = x.getPosition();
+    Vector2f pos2 = y.getPosition(); 
+
+
 }
