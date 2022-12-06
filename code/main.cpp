@@ -135,19 +135,31 @@ void position(vector<Sprite>& x)
     {
         random(x[i]); 
         cout << "Bar's position is (" << x[i].getPosition().x << ", " << x[i].getPosition().y << ")." << endl; 
-        
     }
-
-    checkVector(x); 
 
 }
 
 void random(Sprite& x)
 {
-    x.setPosition(70 + (rand() % 510), 70 + (rand() % 590));
+    x.setPosition(70 + (rand() % 510), 70 + (rand() % 650));
 }
 
-void checkVector(vector<Sprite> x)
+
+
+void jump(RenderWindow& win, Guy& x, Sprite& p) 
+{
+    int JumpHeight = 55;
+    for (int i = 0; i < JumpHeight; i++) 
+    {
+        win.clear();
+        Vector2f pos = x.getPosition(); 
+        pos.y -= 2; 
+        x.setPosition(pos); 
+        p.setPosition(pos); 
+        win.draw(p); 
+    }
+}
+/*void checkVector(vector<Sprite> x)
 {
     int size = x.size(); 
     for (int i = 0; i < size; i++)
@@ -171,16 +183,24 @@ Sprite checkCollision(Sprite x, Sprite y)
     return x;
     
 }
-void jump(RenderWindow& win, Guy& x, Sprite& p) 
+*/
+/*void checkCollision(vector<Sprite> x)
 {
-    int JumpHeight = 55;
-    for (int i = 0; i < JumpHeight; i++) 
+    srand(time(0));
+
+    for (int i = 0; i < 50; i++)
     {
-        win.clear();
-        Vector2f pos = x.getPosition(); 
-        pos.y -= 2; 
-        x.setPosition(pos); 
-        p.setPosition(pos); 
-        win.draw(p); 
+        x[i].setPosition(rand() % 1870 + 50, rand() % 1030 + 50);
+
+        for (int j = 0; j < i - 1; j++)
+        {
+            if (x[i].getGlobalBounds().intersects(x[j].getGlobalBounds()))
+            {
+                x[i].setPosition(rand() % 1870 + 50, rand() % 1030 + 50);
+                cout << "overlap" << endl;
+                j = 0;
+            }
+        }
     }
 }
+*/
