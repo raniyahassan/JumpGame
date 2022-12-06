@@ -42,12 +42,12 @@ int main()
 
     Guy Steve(player); 
 
-    Screen s; 
-    RectangleShape backs = s.square(); 
-
     Event event;
     VideoMode VideoWindow(width, height); 
     RenderWindow window(VideoWindow, "JumpGame" ); 
+    sf::View view(sf::FloatRect(200.f, 200.f, 300.f, 200.f));
+    window.setView(view);
+    view.setCenter(200.f, 200.f);
 
     enum State {START, PLAYING, END}; 
     State current = START; 
@@ -113,7 +113,6 @@ int main()
 
         window.clear();
         window.draw(background);
-        window.draw(backs); 
         window.draw(barOne); 
         for (int i = 0; i < platforms.size(); i++) { window.draw(platforms[i]); } 
         window.draw(player); 
@@ -122,6 +121,24 @@ int main()
     
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 void generator(vector<Sprite>& x, Texture& texture)
 {
